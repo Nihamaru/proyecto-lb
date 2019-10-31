@@ -1,0 +1,61 @@
+{
+  "name": "employee",
+  "plural": "employees",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "last_name": {
+      "type": "string",
+      "required": true
+    },
+    "birth_date": {
+      "type": "date",
+      "required": true
+    },
+    "hire_date": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "dept_emps": {
+      "type": "hasMany",
+      "model": "department",
+      "foreignKey": "id_dept",
+      "options": {
+        "nestRemoting": true
+      },
+      "through": "dept_emp"
+    },
+    "dept_managers": {
+      "type": "hasMany",
+      "model": "department",
+      "foreignKey": "id_dept",
+      "options": {
+        "nestRemoting": true
+      },
+      "through": "dept_manager"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
+}
